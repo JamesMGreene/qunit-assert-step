@@ -1,0 +1,40 @@
+{
+  "name": "qunit-assert-step",
+  "description": "A QUnit plugin for asserting the proper sequence in which the code should execute.",
+  "version": "1.0.0",
+  "author": {
+    "name": "jQuery Foundation and other contributors",
+    "url": "https://github.com/JamesMGreene/qunit-assert-step/blob/master/AUTHORS.txt"
+  },
+  "homepage": "https://github.com/JamesMGreene/qunit-assert-step",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/JamesMGreene/qunit-assert-step.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JamesMGreene/qunit-assert-step/issues"
+  },
+  "license": {
+    "name": "MIT",
+    "url": "http://www.opensource.org/licenses/mit-license.php"
+  },
+  "keywords": [
+    "qunit-plugin",
+    "qunit-assert",
+    "qunit",
+    "assert",
+    "order",
+    "step"
+  ],
+  "main": "qunit-assert-step.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.4.3",
+    "grunt-contrib-qunit": "~0.2.1",
+    "grunt-git-authors": "~1.2.0",
+    "qunitjs": "1.x"
+  }
+}
