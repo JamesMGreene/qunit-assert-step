@@ -1,5 +1,6 @@
-QUnit Step assertion plugin
-================================
+[![Build Status](https://travis-ci.org/JamesMGreene/qunit-assert-step.png)](https://travis-ci.org/JamesMGreene/qunit-assert-step)
+
+# QUnit Step assertion plugin
 
 This plugin for [QUnit](https://github.com/jquery/qunit) adds a `step` assertion method to test
 the proper sequence in which the code should execute.
