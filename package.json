@@ -1,11 +1,18 @@
 {
   "name": "qunit-assert-step",
   "description": "A QUnit plugin for asserting the proper sequence in which the code should execute.",
-  "version": "1.0.2-pre",
+  "version": "1.0.2",
   "author": {
     "name": "jQuery Foundation and other contributors",
     "url": "https://github.com/JamesMGreene/qunit-assert-step/blob/master/AUTHORS.txt"
   },
+  "maintainers": [
+    {
+      "name": "James M. Greene",
+      "email": "james.m.greene@gmail.com",
+      "url": "http://greene.io/"
+    }
+  ],
   "homepage": "https://github.com/JamesMGreene/qunit-assert-step",
   "repository": {
     "type": "git",
