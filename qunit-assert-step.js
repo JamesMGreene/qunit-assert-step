@@ -24,34 +24,101 @@
 
 }(function(QUnit) {
 
-	var api = {
+  /**
+   * Find an appropriate `Assert` context to `push` results to.
+   * @param * context - An unknown context, possibly `Assert`, `Test`, or neither
+   * @private
+   */
+  function _getPushContext(context) {
+    var pushContext;
 
-		/**
-		 * Check the sequence/order
-		 *
-		 * @example test('Example unit test', function(assert) { assert.step(1); setTimeout(function () { assert.step(3); start(); }, 100); assert.step(2); stop(); });
-		 * @param Number expected The excepted step within the test()
-		 * @param String message (optional)
-		 */
-		step: function(expected, message) {
-			if (typeof message === "undefined") {
-				message = "step " + expected;
-			}
+    if (context && typeof context.push === "function") {
+      // `context` is an `Assert` context
+      pushContext = context;
+    }
+    else if (context && context.assert && typeof context.assert.push === "function") {
+      // `context` is a `Test` context
+      pushContext = context.assert;
+    }
+    else if (
+      QUnit && QUnit.config && QUnit.config.current && QUnit.config.current.assert &&
+      typeof QUnit.config.current.assert.push === "function"
+    ) {
+      // `context` is an unknown context but we can find the `Assert` context via QUnit
+      pushContext = QUnit.config.current.assert;
+    }
+    else if (QUnit && typeof QUnit.push === "function") {
+      pushContext = QUnit.push;
+    }
+    else {
+      throw new Error("Could not find the QUnit `Assert` context to push results");
+    }
 
-			// If this is the first time that `assert.step` has been called for the
-			// current test, set its initial `step` counter to `0`
-			if (typeof QUnit.config.current.step === "undefined") {
-				QUnit.config.current.step = 0;
-			}
+    return pushContext;
+  }
 
-			// increment internal step counter
-			QUnit.config.current.step++;
+  /**
+   * Find an appropriate `Test` context to `push` results to.
+   * @param * context - An unknown context, possibly `Assert`, `Test`, or neither
+   * @private
+   */
+  function _getTestContext(context) {
+    var testContext;
 
-			var actual = QUnit.config.current.step;
-			QUnit.push(QUnit.equiv(actual, expected), actual, expected, message);
-		}
+    if (context && typeof context.push === "function" && context.test) {
+      // `context` is an `Assert` context
+      testContext = context.test;
+    }
+    else if (context && context.assert && typeof context.assert.push === "function") {
+      // `context` is a `Test` context
+      testContext = context;
+    }
+    else if (
+      QUnit && QUnit.config && QUnit.config.current && QUnit.config.current.assert &&
+      typeof QUnit.config.current.assert.push === "function"
+    ) {
+      // `context` is an unknown context but we can find the `Test` context via QUnit
+      testContext = QUnit.config.current;
+    }
+    else {
+      throw new Error("Could not find the QUnit `Test` context to maintain state");
+    }
 
-	};
+    return testContext;
+  }
+
+
+  var api = {
+
+    /**
+     * Check the sequence/order
+     *
+     * @example test('Example unit test', function(assert) { assert.step(1); setTimeout(function () { assert.step(3); start(); }, 100); assert.step(2); stop(); });
+     * @param Number expected The excepted step within the test()
+     * @param String message (optional)
+     */
+    step: function(expected, message) {
+      var actual,
+          pushContext = _getPushContext(this),
+          testContext = _getTestContext(this);
+
+      if (typeof message === "undefined") {
+        message = "step " + expected;
+      }
+
+      // If this is the first time that `assert.step` has been called for the
+      // current test, set its initial `step` counter to `0`
+      if (typeof testContext.step === "undefined") {
+        testContext.step = 0;
+      }
+
+      // Increment internal step counter
+      actual = ++testContext.step;
+
+      pushContext.push(QUnit.equiv(actual, expected), actual, expected, message);
+    }
+
+  };
 
 
   QUnit.extend(QUnit.assert, api);
