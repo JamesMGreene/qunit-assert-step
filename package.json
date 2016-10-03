@@ -21,10 +21,7 @@
   "bugs": {
     "url": "https://github.com/JamesMGreene/qunit-assert-step/issues"
   },
-  "license": {
-    "name": "MIT",
-    "url": "http://www.opensource.org/licenses/mit-license.php"
-  },
+  "license": "MIT",
   "keywords": [
     "qunit-plugin",
     "qunit-assert",
@@ -37,11 +34,14 @@
   "scripts": {
     "test": "grunt test"
   },
+  "peerDependencies": {
+    "qunitjs": "*"
+  },
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-jshint": "~0.4.3",
-    "grunt-contrib-qunit": "~0.2.1",
-    "grunt-git-authors": "~1.2.0",
-    "qunitjs": "1.x"
+    "grunt": "^1.0.1",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-qunit": "^1.2.0",
+    "grunt-git-authors": "^3.2.0",
+    "qunitjs": "^2.0.1"
   }
 }
