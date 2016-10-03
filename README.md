@@ -19,7 +19,7 @@ Where:
 ## Examples
 
 ```js
-test("example test", function(assert) {
+QUnit.test("example test", function(assert) {
   function x() {
     assert.step(2, "function y should be called first");
   }
