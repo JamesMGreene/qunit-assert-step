@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/JamesMGreene/qunit-assert-step.png?branch=master)](https://travis-ci.org/JamesMGreene/qunit-assert-step) [![NPM version](https://badge.fury.io/js/qunit-assert-step.png)](https://www.npmjs.com/package/qunit-assert-step)
+[![Build Status](https://travis-ci.org/JamesMGreene/qunit-assert-step.svg?branch=master)](https://travis-ci.org/JamesMGreene/qunit-assert-step) [![NPM version](https://badge.fury.io/js/qunit-assert-step.svg)](https://www.npmjs.com/package/qunit-assert-step)
 
 # QUnit Step assertion plugin
 
