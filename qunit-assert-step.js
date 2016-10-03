@@ -7,20 +7,22 @@ QUnit.extend( QUnit.assert, {
 	 * @param Number expected The excepted step within the test()
 	 * @param String message (optional)
 	 */
-	step: function (expected, message) {
-		// increment internal step counter.
-		QUnit.config.current.step++;
+	step: function(expected, message) {
 		if (typeof message === "undefined") {
 			message = "step " + expected;
 		}
+
+		// If this is the first time that `assert.step` has been called for the
+		// current test, set its initial `step` counter to `0`
+		if (typeof QUnit.config.current.step === "undefined") {
+			QUnit.config.current.step = 0;
+		}
+
+		// increment internal step counter
+		QUnit.config.current.step++;
+
 		var actual = QUnit.config.current.step;
 		QUnit.push(QUnit.equiv(actual, expected), actual, expected, message);
 	}
-});
 
-/**
- * Reset the step counter for every test()
- */
-QUnit.testStart(function () {
-	QUnit.config.current.step = 0;
 });
